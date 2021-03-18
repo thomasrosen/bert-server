@@ -69,7 +69,7 @@ app = Flask(__name__)
 def index():
 
     if request.method == 'GET':
-        return '<title>'+title+'</title><h1>'+title+'</h1>Example: <code>curl -X POST https://bert.qiekub.org -F \'text=How old are you?\'</code>'
+        return '<title>'+title+'</title><h1>'+title+'</h1>Example: <code>curl -X POST https://bert.qiekub.org'+route+' -F \'text=How old are you?\'</code>'
 
     if request.method == 'POST':
         text = request.form.get('text', default='', type=str)
