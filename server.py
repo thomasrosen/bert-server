@@ -41,15 +41,15 @@ model = BertModel.from_pretrained(modelname)
 
 if modelname == 'bert-base-cased':
     example_sentence = 'How old are you?'
-    example_title = 'English Bert'
+    title = 'English Bert'
 elif modelname == 'bert-base-german-cased':
     example_sentence = 'Wie alt bist du?'
-    example_title = 'German Bert'
+    title = 'German Bert'
 else:
     example_sentence = 'How old are you?'
-    example_title = 'Bert'
+    title = 'Bert'
 
-print('Started '+example_title+'.')
+print('Started '+title+'.')
 
 class NumpyEncoder(json.JSONEncoder):
     """ Special json encoder for numpy types """
@@ -72,7 +72,7 @@ app = Flask(__name__)
 def index():
 
     if request.method == 'GET':
-        return '<title>'+example_title+'</title><h1>'+example_title+'</h1>Example: <code>curl -X POST https://bert.qiekub.org -F \'text='+example_sentence+'\'</code>'
+        return '<title>'+title+'</title><h1>'+title+'</h1>Example: <code>curl -X POST https://bert.qiekub.org -F \'text='+example_sentence+'\'</code>'
 
     if request.method == 'POST':
         text = request.form.get('text', default='', type=str)
