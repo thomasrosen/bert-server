@@ -17,6 +17,12 @@ parser.add_argument('-p', '--port',
                     default='2500',
                     metavar='PORT'
                     )
+parser.add_argument('-r', '--route',
+                    dest='route',
+                    help='choose the route',
+                    default='/',
+                    metavar='ROUTe'
+                    )
 parser.add_argument('-m', '--model',
                     dest='modelname',
                     help='choose the model',
@@ -27,6 +33,7 @@ parser.add_argument('-m', '--model',
 args = parser.parse_args()
 
 port = args.port
+route = args.route
 modelname = args.modelname
 
 tokenizer = BertTokenizer.from_pretrained(modelname)
@@ -61,7 +68,7 @@ class NumpyEncoder(json.JSONEncoder):
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET','POST'])
+@app.route(route, methods=['GET', 'POST'])
 def index():
 
     if request.method == 'GET':
