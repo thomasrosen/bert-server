@@ -33,7 +33,7 @@ parser.add_argument('-m', '--model',
 args = parser.parse_args()
 
 port = args.port
-route = args.route
+route = '/'+args.route
 modelname = args.modelname
 
 tokenizer = BertTokenizer.from_pretrained(modelname)
