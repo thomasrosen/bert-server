@@ -4,8 +4,8 @@ from transformers import BertTokenizer, BertModel
 import json
 import numpy
 
-# python3 server.py -p 2501 -m bert-base-cased
-# python3 server.py -p 2502 -m bert-base-german-cased
+# python3 server.py -p 2501 -r de -m bert-base-cased
+# python3 server.py -p 2502 -r en -m bert-base-german-cased
 
 # uberspace web backend set bert.qiekub.org/en --http --port 2501
 # uberspace web backend set bert.qiekub.org/de --http --port 2502
