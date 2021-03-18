@@ -40,13 +40,10 @@ tokenizer = BertTokenizer.from_pretrained(modelname)
 model = BertModel.from_pretrained(modelname)
 
 if modelname == 'bert-base-cased':
-    example_sentence = 'How old are you?'
     title = 'English Bert'
 elif modelname == 'bert-base-german-cased':
-    example_sentence = 'Wie alt bist du?'
     title = 'German Bert'
 else:
-    example_sentence = 'How old are you?'
     title = 'Bert'
 
 print('Started '+title+'.')
@@ -72,7 +69,7 @@ app = Flask(__name__)
 def index():
 
     if request.method == 'GET':
-        return '<title>'+title+'</title><h1>'+title+'</h1>Example: <code>curl -X POST https://bert.qiekub.org -F \'text='+example_sentence+'\'</code>'
+        return '<title>'+title+'</title><h1>'+title+'</h1>Example: <code>curl -X POST https://bert.qiekub.org -F \'text=How old are you?\'</code>'
 
     if request.method == 'POST':
         text = request.form.get('text', default='', type=str)
