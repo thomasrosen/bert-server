@@ -21,7 +21,7 @@ parser.add_argument('-r', '--route',
                     dest='route',
                     help='choose the route',
                     default='/',
-                    metavar='ROUTe'
+                    metavar='ROUTE'
                     )
 parser.add_argument('-m', '--model',
                     dest='modelname',
