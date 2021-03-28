@@ -96,7 +96,7 @@ def index():
         return json.dumps(result.size, cls=NumpyEncoder), 200
 
 
-# print('Gonna listen on 0.0.0.0:'+port)
+print('Gonna listen on 0.0.0.0:'+port)
 
 if __name__ == '__main__':
     from waitress import serve
