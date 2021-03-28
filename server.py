@@ -1,6 +1,5 @@
 from argparse import ArgumentParser
 from flask import Flask, request, jsonify
-from transformers import BertTokenizer, BertModel
 import json
 import numpy
 
@@ -36,10 +35,16 @@ port = args.port
 route = '/'+args.route
 modelname = args.modelname
 
-tokenizer = BertTokenizer.from_pretrained(modelname)
-model = BertModel.from_pretrained(modelname)
+if modelname == 'distilbert-base-uncased':
+    from transformers import DistilBertTokenizer, DistilBertModel
+    tokenizer = DistilBertTokenizer.from_pretrained('distilbert-base-uncased')
+    model = DistilBertModel.from_pretrained('distilbert-base-uncased')
+else:
+    from transformers import BertTokenizer, BertModel
+    tokenizer = BertTokenizer.from_pretrained(modelname)
+    model = BertModel.from_pretrained(modelname)
 
-if modelname == 'bert-base-cased':
+if modelname == 'bert-base-cased' or modelname == 'distilbert-base-uncased':
     title = 'English Bert'
 elif modelname == 'bert-base-german-cased':
     title = 'German Bert'
@@ -78,9 +83,13 @@ def index():
         if text != '':
             encoded_input = tokenizer(text, return_tensors='pt')
             output = model(**encoded_input)
-            result = output.pooler_output.detach().numpy()[0]
 
-        return json.dumps(result, cls=NumpyEncoder), 200
+            if modelname == 'distilbert-base-uncased':
+                result = output.last_hidden_state.detach().numpy()[0]
+            else:
+                result = output.pooler_output.detach().numpy()[0]
+
+        return json.dumps(result.size, cls=NumpyEncoder), 200
 
 
 # print('Gonna listen on 0.0.0.0:'+port)
