@@ -10,6 +10,9 @@ import numpy
 # uberspace web backend set bert.qiekub.org/en --http --port 2501
 # uberspace web backend set bert.qiekub.org/de --http --port 2502
 
+# curl -X POST https://bert.qiekub.org/en -F 'text=How old are you?'
+# curl -X POST 0.0.0.0:2501/en -F 'text=How old are you?'
+
 parser = ArgumentParser()
 parser.add_argument('-p', '--port',
                     dest='port',
